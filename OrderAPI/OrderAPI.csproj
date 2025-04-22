@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrderEntities\OrderEntities.csproj" />
+    <ProjectReference Include="..\OrderServices\OrderServices.csproj" />
   </ItemGroup>
 
 </Project>

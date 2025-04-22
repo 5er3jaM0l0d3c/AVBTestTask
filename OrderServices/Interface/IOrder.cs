@@ -1,0 +1,15 @@
+﻿using OrderEntities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OrderServices.Interface
+{
+    public interface IOrder
+    {
+        void AddOrder(Order order);
+        Order? GetOrder(int id);
+    }
+}
