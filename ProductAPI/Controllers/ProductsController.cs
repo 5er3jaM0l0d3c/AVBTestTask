@@ -17,14 +17,17 @@ namespace ProductAPI.Controllers
             this.Product = product;
         }
 
-        [Authorize]
         [HttpGet("{id}")]
-        public Product? GetProducts(int id)
+        public IActionResult GetProducts(int id)
         {
-            return Product.GetProduct(id);
+            var result = Product.GetProduct(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
 
-        [Authorize]
         [HttpPost]
         public IActionResult AddProduct([FromBody] Product product) 
         {
@@ -32,7 +35,6 @@ namespace ProductAPI.Controllers
             return Ok();
         }
 
-        [Authorize]
         [HttpPut("{productId}/stock")]
         public IActionResult UpdateProduct(int productId, int amount)
         {

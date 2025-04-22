@@ -18,8 +18,21 @@ namespace OrderServices.Service
         }
 
 
-        public void AddOrder(Order order)
+        public async void AddOrder(Order order)
         {
+            using(HttpClient client = new())
+            {
+                var response = await client.GetAsync("http://localhost:5066/products/" + order.ProductId.ToString());
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception("Product with Id=" + order.ProductId + " is undefined");
+                
+                response = await client.PutAsync("http://localhost:5066/products/" + order.ProductId.ToString() + "/-" + order.ProductAmount.ToString(), null);
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception("Something wrong");
+
+            }
+
             context.Order.Add(order);
         }
 
