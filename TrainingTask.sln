@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductAPI", "ProductAPI\ProductAPI.csproj", "{40EF5DB2-C3C0-4C2F-89FC-3B06D5826F26}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductEntities", "ProductEntities\ProductEntities.csproj", "{6F858DD5-C488-4043-8D0A-4DE5821CF0FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductServices", "ProductServices\ProductServices.csproj", "{B4BF468D-35CB-4451-B491-11DAEE6936A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductService", "ProductService", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,18 @@ Global
 		{6F858DD5-C488-4043-8D0A-4DE5821CF0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F858DD5-C488-4043-8D0A-4DE5821CF0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F858DD5-C488-4043-8D0A-4DE5821CF0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4BF468D-35CB-4451-B491-11DAEE6936A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4BF468D-35CB-4451-B491-11DAEE6936A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4BF468D-35CB-4451-B491-11DAEE6936A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4BF468D-35CB-4451-B491-11DAEE6936A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{40EF5DB2-C3C0-4C2F-89FC-3B06D5826F26} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{6F858DD5-C488-4043-8D0A-4DE5821CF0FB} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+		{B4BF468D-35CB-4451-B491-11DAEE6936A2} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9748CFC4-DF46-4856-B02E-7CCD006DDB2E}
