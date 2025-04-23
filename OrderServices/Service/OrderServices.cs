@@ -22,12 +22,12 @@ namespace OrderServices.Service
 
         public async Task AddOrder(Order order)
         {
-            HttpClient client = new();
-            var response = await client.GetAsync("http://localhost:5066/products/" + order.ProductId.ToString());
+            var client = new HttpClient();
+            var response = await client.GetAsync("http://localhost:81/products/" + order.ProductId.ToString());
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Something wrong");
 
-            response = await client.PutAsync("http://localhost:5066/products/" + order.ProductId.ToString() + "/stock?amount=" + order.ProductAmount.ToString(), null);
+            response = await client.PutAsync("http://localhost:81/products/" + order.ProductId.ToString() + "/stock?amount=" + order.ProductAmount.ToString(), null);
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Something wrong");
 

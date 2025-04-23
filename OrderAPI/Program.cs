@@ -1,14 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using OrderEntities;
 using OrderServices.Interface;
+using ProductEntities;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddScoped<IOrder, OrderServices.Service.OrderServices>();
-
 builder.Services.AddDbContext<OrderServiceDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IOrder, OrderServices.Service.OrderServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -16,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -28,4 +31,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+
+app.Run("http://*:80"); ;
