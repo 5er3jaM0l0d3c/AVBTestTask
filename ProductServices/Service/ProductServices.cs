@@ -32,7 +32,10 @@ namespace ProductServices.Service
         {
             var product = GetProduct(productId);
             if (product != null)
-                product.Amount = amount;
+            {
+                product.Amount += amount;
+                if (product.Amount < 0) throw new InvalidOperationException("Product.Amount < 0");
+            }
             else
                 throw new Exception("Product with Id=" + productId + " is undefined");
             context.SaveChanges();

@@ -6,7 +6,7 @@ using ProductServices.Interface;
 
 namespace ProductAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -36,7 +36,7 @@ namespace ProductAPI.Controllers
         }
 
         [HttpPut("{productId}/stock")]
-        public IActionResult UpdateProduct(int productId, int amount)
+        public IActionResult UpdateProduct(int productId, [FromQuery]int amount)
         {
             Product.UpdateProduct(productId, amount);
             return Ok();

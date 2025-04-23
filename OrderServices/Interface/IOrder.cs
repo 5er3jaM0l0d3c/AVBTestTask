@@ -9,7 +9,7 @@ namespace OrderServices.Interface
 {
     public interface IOrder
     {
-        void AddOrder(Order order);
+        Task AddOrder(Order order);
         Order? GetOrder(int id);
     }
 }

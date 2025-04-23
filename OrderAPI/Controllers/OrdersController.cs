@@ -5,7 +5,7 @@ using OrderServices.Interface;
 
 namespace OrderAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -22,9 +22,9 @@ namespace OrderAPI.Controllers
         }
 
         [HttpPost]
-        public void AddOrder([FromBody]Order order)
+        public async Task AddOrder([FromBody]Order order)
         {
-            Order.AddOrder(order);
+            await Order.AddOrder(order);
         }
     }
 }
