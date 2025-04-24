@@ -16,13 +16,13 @@ namespace OrderAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public Order? GetOrder(int id)
+        public OrderEntities.Order? GetOrder(int id)
         {
             return Order.GetOrder(id);
         }
 
         [HttpPost]
-        public async Task AddOrder([FromBody]Order order)
+        public async Task AddOrder([FromBody] OrderEntities.Order order)
         {
             await Order.AddOrder(order);
         }
