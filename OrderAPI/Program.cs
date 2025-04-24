@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using OrderAPI.Services;
 using OrderEntities;
 using OrderServices.Interface;
 using ProductEntities;
@@ -20,6 +21,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.MapGrpcService<OrderService>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -33,4 +35,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-app.Run("http://*:80"); ;
+app.Run("http://*:82"); ;

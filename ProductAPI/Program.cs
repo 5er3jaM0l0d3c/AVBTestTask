@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ProductAPI.Service;
 using ProductEntities;
 using ProductServices.Interface;
 using ProductServices.Service;
@@ -6,6 +7,7 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddGrpc();
 // Add services to the container.
 builder.Services.AddDbContext<ProductServiceDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -18,6 +20,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.MapGrpcService<ProductService>();
 
 
 // Configure the HTTP request pipeline.
@@ -30,5 +33,6 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run("http://*:81");
