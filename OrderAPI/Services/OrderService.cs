@@ -12,9 +12,28 @@ namespace OrderAPI.Services
         {
             this.context = context;
         }
-        public Task AddOrder(OrderEntities.Order order)
+
+        public async override Task<Empty_Response> Add_Order(Order request, ServerCallContext context)
         {
-            throw new NotImplementedException();
+            OrderEntities.Order order = new()
+            {
+                ProductAmount = request.ProductAmount,
+                ProductId = request.ProductId,
+            };
+
+            await AddOrder(order);
+
+            return await Task.FromResult(new Empty_Response());
+        }
+
+        public async Task AddOrder(OrderEntities.Order order)
+        {
+            if(await ProductClientService.IsProductExist(order.ProductId))
+            {
+                await ProductClientService.UpdateAmount(order.ProductId, order.ProductAmount);
+                context.Order.Add(order);
+                context.SaveChanges();
+            }
         }
 
         public OrderEntities.Order? GetOrder(int id)

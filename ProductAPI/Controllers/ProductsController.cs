@@ -29,7 +29,7 @@ namespace ProductAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct([FromBody] Product product) 
+        public IActionResult AddProduct([FromBody] ProductEntities.Product product) 
         {
             Product.AddProduct(product);
             return Ok();

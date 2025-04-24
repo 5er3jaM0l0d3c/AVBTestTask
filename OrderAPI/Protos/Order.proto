@@ -13,8 +13,8 @@ service OrderProto {
 
 message Order{
 	google.protobuf.Int32Value id = 1;
-	google.protobuf.Int32Value product_id = 2;
-	google.protobuf.Int32Value product_amount=3;
+	int32 product_id = 2;
+	int32 product_amount=3;
 }
 
 
