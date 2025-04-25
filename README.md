@@ -1,5 +1,6 @@
-Ссылки на Docker Hub не будет. 
-Для запуска контейнеров в корне решения:
-```power-shell
-docker-compose up -d --build
+# AVBTestTask
+Для запуска с помощью Docker:
+1. Ввести в корне решения
+```powershell
+  docker-compose up -d --build
 ```
