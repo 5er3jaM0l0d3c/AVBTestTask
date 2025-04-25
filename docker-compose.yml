@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: OrderAPI/Dockerfile
     ports:
-      - "5000:80"
+      - "82:82"
     environment:
       - ConnectionStrings__DefaultConnection=Server=db1;Database=OrderServiceDB;User Id=postgres;Password=postgres;
     depends_on:
@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: ProductAPI/Dockerfile
     ports:
-      - "5001:81"
+      - "81:81"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db2;Database=ProductServiceDB;User Id=postgres;Password=postgres;
