@@ -1,2 +1,6 @@
 # AVBTestTask
-[Ссылка на DockerHub](https://hub.docker.com/repository/docker/serejamolodec/test_task/general)
+Для запуска с помощью Docker:
+1. Ввести в корне решения
+```powershell
+  docker-compose up -d --build
+```
