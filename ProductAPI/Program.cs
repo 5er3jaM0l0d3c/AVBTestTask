@@ -9,7 +9,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddGrpc();
 // Add services to the container.
-builder.Services.AddDbContext<ProductServiceDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+var dbHost = Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"
+    ? "db2"
+    : "localhost";
+
+// Строим строку подключения
+var connectionString = $"Server={dbHost};Port=5432;Database=ProductServiceDB;User Id=postgres;Password=postgres;";
+
+// Регистрируем контекст
+builder.Services.AddDbContext<ProductServiceDbContext>(options =>
+    options.UseNpgsql(connectionString));
 
 builder.Services.AddScoped<IProduct, ProductServices.Service.ProductServices>();
 
@@ -23,7 +32,25 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ProductServiceDbContext>();
-    await dbContext.Database.MigrateAsync();
+
+    try
+    {
+        // Проверяем, есть ли pending миграции
+        var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+        if (pendingMigrations.Any())
+        {
+            Console.WriteLine($"Applying migrations: {string.Join(", ", pendingMigrations)}");
+            await dbContext.Database.MigrateAsync();
+            Console.WriteLine("Migrations applied successfully");
+        }
+        else
+        {
+            Console.WriteLine("No pending migrations to apply");
+        }
+    }
+    catch
+    {
+    }
 }
 
 app.MapGrpcService<ProductService>();
