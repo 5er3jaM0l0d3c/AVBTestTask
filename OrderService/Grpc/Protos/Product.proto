@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "OrderService.Grpc.Protos";
+
+package ProductProto;
+
+service ProductProto {
+	rpc gGetProduct (ProductId) returns (Product);
+	rpc gAddProduct (Product) returns (EmptyResponse);
+	rpc gUpdateAmount (ProductIdAmount) returns (EmptyResponse);
+}
+
+message ProductIdAmount {
+	int32 Id = 1;
+	int32 Amount = 2;
+}
+
+message ProductId {
+	int32 Id = 1;
+}
+
+message Product {
+	int32 Id = 1;
+	string Name = 2;
+	float Price = 3;
+	int32 Amount = 4;
+}
+
+
+message EmptyResponse {}
