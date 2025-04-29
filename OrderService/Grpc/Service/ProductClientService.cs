@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 namespace OrderAPI.Grpc.Service
 {
     public static class ProductClientService
-    {
+    {   
         public async static Task<bool> IsProductExist(int id)
         {
-            using var channel = GrpcChannel.ForAddress("http://localhost:81");
+            using var channel = GrpcChannel.ForAddress("https://localhost:5057");
 
             var client = new ProductProto.ProductProtoClient(channel);
 
@@ -26,7 +26,7 @@ namespace OrderAPI.Grpc.Service
 
         public async static Task UpdateAmount(int id, int amount)
         {
-            using var channel = GrpcChannel.ForAddress("http://localhost:81");
+            using var channel = GrpcChannel.ForAddress("https://localhost:5057");
 
             var client = new ProductProto.ProductProtoClient(channel);
 

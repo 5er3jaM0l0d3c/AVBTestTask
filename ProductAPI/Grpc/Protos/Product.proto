@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "ProductAPI";
+option csharp_namespace = "ProductService.Grpc.Protos";
 
 package ProductProto;
 
@@ -12,7 +12,7 @@ service ProductProto {
 
 message ProductIdAmount {
 	int32 Id = 1;
-	int32 Amount = 2;
+	int32 Amount = 2;	
 }
 
 message ProductId {

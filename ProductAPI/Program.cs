@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using ProductAPI.Service;
-using ProductEntities;
-using ProductServices.Interface;
-using ProductServices.Service;
-using System;
+using ProductService.Application.Interface;
+using ProductService.Application.Service;
+using ProductService.Grpc.Service;
+using ProductService.Infrastructure.DbContexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +19,8 @@ var connectionString = $"Server={dbHost};Port=5432;Database=ProductServiceDB;Use
 builder.Services.AddDbContext<ProductServiceDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-builder.Services.AddScoped<IProduct, ProductServices.Service.ProductServices>();
+builder.Services.AddScoped<IProduct, ProductServices>();
+builder.Services.AddScoped<ProductServerService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -53,7 +53,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.MapGrpcService<ProductService>();
+app.MapGrpcService<ProductServerService>();
 
 
 // Configure the HTTP request pipeline.
@@ -68,4 +68,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-app.Run("http://*:81");
+app.Run();

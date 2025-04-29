@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ProductEntities;
-using ProductServices.Interface;
+﻿using Microsoft.AspNetCore.Mvc;
+using ProductService.Application.Interface;
+using ProductService.Domain.Entities;
 
-namespace ProductAPI.Controllers
+
+namespace ProductService.API.Controllers
 {
     [Route("/[controller]")]
     [ApiController]
@@ -14,7 +13,7 @@ namespace ProductAPI.Controllers
 
         public ProductsController(IProduct product)
         {
-            this.Product = product;
+            Product = product;
         }
 
         [HttpGet("{id}")]
@@ -29,14 +28,14 @@ namespace ProductAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct([FromBody] ProductEntities.Product product) 
+        public IActionResult AddProduct([FromBody] Product product)
         {
             Product.AddProduct(product);
             return Ok();
         }
 
         [HttpPut("{productId}/stock")]
-        public IActionResult UpdateProduct(int productId, [FromQuery]int amount)
+        public IActionResult UpdateProduct(int productId, [FromQuery] int amount)
         {
             Product.UpdateProduct(productId, amount);
             return Ok();

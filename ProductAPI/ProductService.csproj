@@ -23,17 +23,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ProductEntities\ProductEntities.csproj" />
-    <ProjectReference Include="..\ProductServices\ProductServices.csproj" />
-  </ItemGroup>
-
 	<ItemGroup>
-		<Protobuf Include="Protos/Product.proto" GrpcService="Server" />
+		<Protobuf Include="Grpc\Protos\Product.proto" GrpcService="Server" />
 	</ItemGroup>
 	
   <ItemGroup>
-    <Folder Include="Protos\" />
+    <Folder Include="Grpc\Protos\" />
   </ItemGroup>
 
 </Project>
