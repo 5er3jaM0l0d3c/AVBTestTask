@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OrderAPI.Application.Interfaces;
 using OrderEntities;
-using OrderServices.Interface;
 
-namespace OrderAPI.Controllers
+namespace OrderAPI.API.Controllers
 {
     [Route("/[controller]")]
     [ApiController]
@@ -16,13 +16,13 @@ namespace OrderAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public OrderEntities.Order? GetOrder(int id)
+        public Order? GetOrder(int id)
         {
             return Order.GetOrder(id);
         }
 
         [HttpPost]
-        public async Task AddOrder([FromBody] OrderEntities.Order order)
+        public async Task AddOrder([FromBody] Order order)
         {
             await Order.AddOrder(order);
         }

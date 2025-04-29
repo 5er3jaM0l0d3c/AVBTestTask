@@ -4,9 +4,9 @@ services:
   api1:
     build:
       context: .
-      dockerfile: OrderAPI/Dockerfile
+      dockerfile: OrderService/Dockerfile
     ports:
-      - "82:82"
+      - "5056:82"
     environment:
       - ConnectionStrings__DefaultConnection=Server=db1;Database=OrderServiceDB;User Id=postgres;Password=postgres;
     depends_on:

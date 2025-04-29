@@ -1,7 +1,8 @@
 ﻿using Grpc.Net.Client;
+using OrderService.Grpc.Protos;
 using System.Threading.Tasks;
 
-namespace OrderAPI.Services
+namespace OrderAPI.Grpc.Service
 {
     public static class ProductClientService
     {
@@ -15,7 +16,7 @@ namespace OrderAPI.Services
 
             Product product = await client.gGetProductAsync(productId);
 
-            ProductEntities.Product response = new ProductEntities.Product()
+            Product response = new Product()
             {
                 Id = productId.Id,
             };

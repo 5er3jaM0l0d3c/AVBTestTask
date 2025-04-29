@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderServices.Interface
+namespace OrderAPI.Application.Interfaces
 {
     public interface IOrder
     {

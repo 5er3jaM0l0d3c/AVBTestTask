@@ -1,10 +1,8 @@
+using OrderAPI.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Writers;
-using OrderAPI.Services;
-using OrderEntities;
-using OrderServices.Interface;
-using ProductEntities;
-using System;
+using OrderAPI.Infrastructure.DbContexts;
+using OrderAPI.Application.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +20,7 @@ var connectionString = $"Server={dbHost};Port=5432;Database=OrderServiceDB;User 
 builder.Services.AddDbContext<OrderServiceDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-builder.Services.AddScoped<IOrder, OrderServices.Service.OrderServices>();
+builder.Services.AddScoped<IOrder, OrderServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -55,9 +53,6 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.MapGrpcService<OrderService>();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -69,4 +64,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-app.Run("http://*:82"); ;
+app.Run("https://*:5056");
