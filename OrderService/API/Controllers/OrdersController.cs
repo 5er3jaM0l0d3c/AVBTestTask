@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrderEntities;
 using OrderService.Application.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace OrderService.API.Controllers
 {
@@ -15,7 +16,7 @@ namespace OrderService.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Order?> GetOrder(int id)
+        public async Task<Order?> GetOrder([Range(1, int.MaxValue, ErrorMessage = "Id must be > 0")] int id)
         {
             return await _order.GetOrder(id);
         }

@@ -41,14 +41,14 @@ namespace ProductService.Grpc.Service
             return Task.FromResult(new EmptyResponse { });
         }
 
-        public override Task<EmptyResponse> gReduceProductAmount(ProductIdAmount request, ServerCallContext context)
+        public async override Task<EmptyResponse> gReduceProductAmount(ProductIdAmount request, ServerCallContext context)
         {
             var productId = request.Id;
             var amount = request.Amount;
 
-            service.ReduceProductAmount(productId, amount);
+            await service.ReduceProductAmount(productId, amount);
 
-            return Task.FromResult(new EmptyResponse { });
+            return await Task.FromResult(new EmptyResponse { });
         }
 
     }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductService.Application.Interfaces;
 using ProductService.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace ProductService.API.Controllers
@@ -17,7 +19,7 @@ namespace ProductService.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProducts(int id)
+        public async Task<IActionResult> GetProducts([Range(1, int.MaxValue, ErrorMessage = "Id must be > 0")] int id)
         {
             var result = await _product.GetProduct(id);
             if (result == null)
@@ -35,7 +37,7 @@ namespace ProductService.API.Controllers
         }
 
         [HttpPut("{productId}/stock")]
-        public IActionResult UpdateProduct(int productId, [FromQuery] int amount)
+        public IActionResult UpdateProduct(int productId, [FromQuery, Required, Range(1, int.MaxValue, ErrorMessage = "amount must be > 0")] int amount)
         {
             _product.UpdateProduct(productId, amount);
             return Ok();
