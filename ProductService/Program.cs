@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ProductService.Application.Interface;
-using ProductService.Application.Service;
+using ProductService.Application.Interfaces;
+using ProductService.Application.Services;
 using ProductService.Grpc.Service;
 using ProductService.Infrastructure.DbContexts;
 

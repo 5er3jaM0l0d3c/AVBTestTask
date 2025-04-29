@@ -1,11 +1,10 @@
 ﻿using Grpc.Core;
-using ProductService.Application.Interface;
-using ProductService.Application.Service;
+using ProductService.Application.Interfaces;
 using ProductService.Grpc.Protos;
 
 namespace ProductService.Grpc.Service
 {
-    public class ProductServerService : ProductProto.ProductProtoBase   
+    public class ProductServerService : ProductProto.ProductProtoBase
     {
         private IProduct service { get; set; }
 
@@ -31,7 +30,7 @@ namespace ProductService.Grpc.Service
 
         public override Task<EmptyResponse> gAddProduct(Product request, ServerCallContext context)
         {
-            ProductService.Domain.Entities.Product product = new ()
+            ProductService.Domain.Entities.Product product = new()
             {
                 Name = request.Name,
                 Amount = request.Amount,
@@ -42,12 +41,12 @@ namespace ProductService.Grpc.Service
             return Task.FromResult(new EmptyResponse { });
         }
 
-        public override Task<EmptyResponse> gUpdateAmount(ProductIdAmount request, ServerCallContext context)
+        public override Task<EmptyResponse> gReduceProductAmount(ProductIdAmount request, ServerCallContext context)
         {
             var productId = request.Id;
             var amount = request.Amount;
 
-            service.UpdateProduct(productId, amount);
+            service.ReduceProductAmount(productId, amount);
 
             return Task.FromResult(new EmptyResponse { });
         }

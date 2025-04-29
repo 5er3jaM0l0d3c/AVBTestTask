@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrderAPI.Application.Interfaces;
-using OrderAPI.Grpc.Service;
 using OrderEntities;
-using OrderServiceDbContext = OrderAPI.Infrastructure.DbContexts.OrderServiceDbContext;
+using OrderService.Application.Interfaces;
+using OrderService.Grpc.Service;
+using OrderServiceDbContext = OrderService.Infrastructure.DbContexts.OrderServiceDbContext;
 
-namespace OrderAPI.Application.Services
+namespace OrderService.Application.Services
 {
     public class OrderServices : IOrder
     {
-        private OrderServiceDbContext context {  get; set; }
+        private OrderServiceDbContext context { get; set; }
 
         public OrderServices(OrderServiceDbContext context)
         {
@@ -25,9 +25,9 @@ namespace OrderAPI.Application.Services
             }
         }
 
-        public async Task<Order?> GetOrder(int id)
+        public async Task<Order> GetOrder(int id)
         {
-            return await context.Order.FirstOrDefaultAsync(o => o.Id == id);
+            return await context.Order.FirstOrDefaultAsync(o => o.Id == id) ?? throw new InvalidOperationException("Order with Id = " + id + " not found");
         }
     }
 }

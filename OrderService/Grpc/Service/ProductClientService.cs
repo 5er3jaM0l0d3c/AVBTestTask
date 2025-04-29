@@ -1,11 +1,10 @@
 ﻿using Grpc.Net.Client;
 using OrderService.Grpc.Protos;
-using System.Threading.Tasks;
 
-namespace OrderAPI.Grpc.Service
+namespace OrderService.Grpc.Service
 {
     public static class ProductClientService
-    {   
+    {
         public async static Task<bool> IsProductExist(int id)
         {
             using var channel = GrpcChannel.ForAddress("https://localhost:5057");
@@ -32,7 +31,7 @@ namespace OrderAPI.Grpc.Service
 
             ProductIdAmount productId = new ProductIdAmount() { Id = id, Amount = amount };
 
-            await client.gUpdateAmountAsync(productId);
+            await client.gReduceProductAmountAsync(productId);
         }
     }
 }

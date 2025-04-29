@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProductService.Application.Interface;
+using ProductService.Application.Interfaces;
 using ProductService.Domain.Entities;
 
 

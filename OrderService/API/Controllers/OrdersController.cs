@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OrderAPI.Application.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
 using OrderEntities;
+using OrderService.Application.Interfaces;
 
-namespace OrderAPI.API.Controllers
+namespace OrderService.API.Controllers
 {
     [Route("/[controller]")]
     [ApiController]

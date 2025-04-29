@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OrderEntities;
 
-namespace OrderAPI.Infrastructure.DbContexts;
+namespace OrderService.Infrastructure.DbContexts;
 
 public partial class OrderServiceDbContext : DbContext
 {

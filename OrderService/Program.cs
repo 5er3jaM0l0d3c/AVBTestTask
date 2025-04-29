@@ -1,7 +1,7 @@
-using OrderAPI.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using OrderAPI.Infrastructure.DbContexts;
-using OrderAPI.Application.Services;
+using OrderService.Application.Interfaces;
+using OrderService.Application.Services;
+using OrderService.Infrastructure.DbContexts;
 
 
 var builder = WebApplication.CreateBuilder(args);

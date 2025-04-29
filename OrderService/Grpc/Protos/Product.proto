@@ -7,7 +7,7 @@ package ProductProto;
 service ProductProto {
 	rpc gGetProduct (ProductId) returns (Product);
 	rpc gAddProduct (Product) returns (EmptyResponse);
-	rpc gUpdateAmount (ProductIdAmount) returns (EmptyResponse);
+	rpc gReduceProductAmount (ProductIdAmount) returns (EmptyResponse);
 }
 
 message ProductIdAmount {
