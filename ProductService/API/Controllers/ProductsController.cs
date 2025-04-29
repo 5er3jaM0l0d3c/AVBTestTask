@@ -17,9 +17,9 @@ namespace ProductService.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetProducts(int id)
+        public async Task<IActionResult> GetProducts(int id)
         {
-            var result = Product.GetProduct(id);
+            var result = await Product.GetProduct(id);
             if (result == null)
             {
                 return NotFound();
@@ -28,10 +28,10 @@ namespace ProductService.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct([FromBody] Product product)
+        public async Task<IActionResult> AddProduct([FromBody] Product product)
         {
-            Product.AddProduct(product);
-            return Ok();
+            await Product.AddProduct(product);
+            return Created("https://localhost:5057/Products/" + product.Id, product);
         }
 
         [HttpPut("{productId}/stock")]

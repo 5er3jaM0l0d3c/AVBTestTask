@@ -15,18 +15,18 @@ namespace ProductService.Grpc.Service
         }
 
 
-        public override Task<Product> gGetProduct(ProductId request, ServerCallContext context)
+        public async override Task<Product> gGetProduct(ProductId request, ServerCallContext context)
         {
             var productId = request.Id;
 
-            var product = service.GetProduct(productId);
+            var product = await service.GetProduct(productId);
 
             if (product == null)
             {
                 product = new();
             }
 
-            return Task.FromResult(new Product { Id = product.Id, Amount = product.Amount, Name = product.Name, Price = (float)product.Price });
+            return await Task.FromResult(new Product { Id = product.Id, Amount = product.Amount, Name = product.Name, Price = (float)product.Price });
         }
 
         public override Task<EmptyResponse> gAddProduct(Product request, ServerCallContext context)

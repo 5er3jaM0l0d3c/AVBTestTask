@@ -10,6 +10,6 @@ namespace OrderAPI.Application.Interfaces
     public interface IOrder
     {
         Task AddOrder(Order order);
-        Order? GetOrder(int id);
+        Task<Order?> GetOrder(int id);
     }
 }

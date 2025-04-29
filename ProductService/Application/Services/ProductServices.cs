@@ -1,4 +1,5 @@
-﻿using ProductService.Application.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using ProductService.Application.Interface;
 using ProductService.Domain.Entities;
 using ProductService.Infrastructure.DbContexts;
 
@@ -13,20 +14,21 @@ namespace ProductService.Application.Service
             this.context = context;
         }
 
-        public void AddProduct(Product product)
+        public async Task AddProduct(Product product)
         {
-            context.Product.Add(product);
-            context.SaveChanges();
+            await context.Product.AddAsync(product);
+            await context.SaveChangesAsync();
+            await context.Product.FirstOrDefaultAsync(x => x == product);
         }
 
-        public Product? GetProduct(int id)
+        public async Task<Product?> GetProduct(int id)
         {
-            return context.Product.FirstOrDefault(x => x.Id == id);
+            return await context.Product.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void UpdateProduct(int productId, int amount)
+        public async Task<Product?> UpdateProduct(int productId, int amount)
         {
-            var product = GetProduct(productId);
+            var product = await GetProduct(productId);
             if (product != null)
             {
                 product.Amount += amount;
@@ -40,7 +42,8 @@ namespace ProductService.Application.Service
                 throw new Exception("Product with Id=" + productId + " is undefined");
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
+            return await context.Product.FirstOrDefaultAsync(x => x.Id == productId);
         }
     }
 }

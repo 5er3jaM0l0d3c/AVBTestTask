@@ -16,15 +16,16 @@ namespace OrderAPI.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public Order? GetOrder(int id)
+        public async Task<Order?> GetOrder(int id)
         {
-            return Order.GetOrder(id);
+            return await Order.GetOrder(id);
         }
 
         [HttpPost]
-        public async Task AddOrder([FromBody] Order order)
+        public async Task<IActionResult> AddOrder([FromBody] Order order)
         {
             await Order.AddOrder(order);
+            return Created("https://localhost:5066/orders/" + order.Id, order);
         }
     }
 }

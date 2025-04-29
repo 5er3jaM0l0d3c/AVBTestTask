@@ -1,4 +1,5 @@
-﻿using OrderAPI.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using OrderAPI.Application.Interfaces;
 using OrderAPI.Grpc.Service;
 using OrderEntities;
 using OrderServiceDbContext = OrderAPI.Infrastructure.DbContexts.OrderServiceDbContext;
@@ -14,19 +15,19 @@ namespace OrderAPI.Application.Services
             this.context = context;
         }
 
-        public async Task AddOrder(OrderEntities.Order order)
+        public async Task AddOrder(Order order)
         {
             if (await ProductClientService.IsProductExist(order.ProductId))
             {
                 await ProductClientService.UpdateAmount(order.ProductId, order.ProductAmount);
-                context.Order.Add(order);
-                context.SaveChanges();
+                await context.Order.AddAsync(order);
+                await context.SaveChangesAsync();
             }
         }
 
-        public Order? GetOrder(int id)
+        public async Task<Order?> GetOrder(int id)
         {
-            return context.Order.FirstOrDefault(o => o.Id == id);
+            return await context.Order.FirstOrDefaultAsync(o => o.Id == id);
         }
     }
 }

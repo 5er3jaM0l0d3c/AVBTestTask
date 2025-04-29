@@ -10,8 +10,8 @@ namespace ProductService.Application.Interface
 {
     public interface IProduct
     {
-        public Product? GetProduct(int id);
-        public void AddProduct(Product product);
-        public void UpdateProduct(int productId, int amount);
+        public Task<Product?> GetProduct(int id);
+        public Task AddProduct(Product product);
+        public Task<Product?> UpdateProduct(int productId, int amount);
     }
 }
