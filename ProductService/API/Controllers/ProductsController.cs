@@ -9,17 +9,17 @@ namespace ProductService.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private IProduct Product { get; set; }
+        private IProduct _product { get; set; }
 
         public ProductsController(IProduct product)
         {
-            Product = product;
+            _product = product;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProducts(int id)
         {
-            var result = await Product.GetProduct(id);
+            var result = await _product.GetProduct(id);
             if (result == null)
             {
                 return NotFound();
@@ -30,14 +30,14 @@ namespace ProductService.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct([FromBody] Product product)
         {
-            await Product.AddProduct(product);
+            await _product.AddProduct(product);
             return Created("https://localhost:5057/Products/" + product.Id, product);
         }
 
         [HttpPut("{productId}/stock")]
         public IActionResult UpdateProduct(int productId, [FromQuery] int amount)
         {
-            Product.UpdateProduct(productId, amount);
+            _product.UpdateProduct(productId, amount);
             return Ok();
         }
     }

@@ -9,22 +9,22 @@ namespace OrderAPI.API.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private IOrder Order { get; set; }
+        private IOrder _order { get; set; }
         public OrdersController(IOrder order)
         {
-            Order = order;
+            _order = order;
         }
 
         [HttpGet("{id}")]
         public async Task<Order?> GetOrder(int id)
         {
-            return await Order.GetOrder(id);
+            return await _order.GetOrder(id);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddOrder([FromBody] Order order)
         {
-            await Order.AddOrder(order);
+            await _order.AddOrder(order);
             return Created("https://localhost:5066/orders/" + order.Id, order);
         }
     }
